@@ -8,7 +8,7 @@ static void vector_grow(vector *vector)
 {
 	vector->allocatedLength *= 2;
 	vector->elements = realloc(vector->elements, vector->elementSize * vector->allocatedLength);
-	assert(vector->elements != NULL);
+	assert(vector->elements);
 }
 
 static void *vector_address(vector *vector, int index)
@@ -17,18 +17,26 @@ static void *vector_address(vector *vector, int index)
 	return (char *)vector->elements + addr;
 }
 
-void vector_new(vector *vector, int elementSize)
+void vector_new(vector *vector, int elementSize, void (*freeFn)(void *))
 {
 	assert(elementSize > 0);
 	vector->elementSize = elementSize;
 	vector->logicalLength = 0;
 	vector->allocatedLength = 2;
 	vector->elements = NULL;
+	vector->freeFn = freeFn;
 	vector_grow(vector);
 }
 
 void vector_destroy(vector *vector)
 {
+	if(vector->freeFn) {
+		int i;
+		for(i = 0; i < vector_size(vector); i++) {
+			vector->freeFn(vector_address(vector, i));
+		}
+	}
+
 	// free main elements
 	free(vector->elements);
 }
@@ -54,4 +62,48 @@ void vector_item_at(vector *vector, int index, void *target)
 
 	void *source = vector_address(vector, index);
 	memcpy(target, source, vector->elementSize);
+}
+
+void vector_insert_at(vector *vector, int index, void *target)
+{
+	assert(index >= 0 && index <= vector->logicalLength);
+	vector_add(vector, target);
+
+	if(index < vector->logicalLength) {	
+		int i;
+		void *source;
+		void *destination;
+
+		for(i = vector->logicalLength - 2; i > index; i--) {
+			source = vector_address(vector, i);
+			destination = vector_address(vector, i + 1);
+			memcpy(destination, source, vector->elementSize);
+		}
+
+		destination = vector_address(vector, i);
+		memcpy(destination, target, vector->elementSize);
+	}
+}
+
+void vector_remove_at(vector *vector, int index)
+{
+	assert(index >= 0 && index < vector->logicalLength);
+	void *item = vector_address(vector, index);
+	if(vector->freeFn) {
+		vector->freeFn(item);
+	}
+
+	if(index < vector->logicalLength - 1) {
+		int i;
+		void *source;
+		void *destination;
+
+		for(i = index; i < vector->logicalLength; i++) {
+			source = vector_address(vector, i + 1);
+			destination = vector_address(vector, i);
+			memcpy(destination, source, vector->elementSize);
+		}
+	}
+
+	vector->logicalLength--;
 }
