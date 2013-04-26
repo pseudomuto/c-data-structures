@@ -7,6 +7,7 @@ typedef struct {
 
 void vector_new(vector *vector, int elementSize);
 void vector_destroy(vector *vector);
+int vector_size(vector *vector);
 
 void vector_add(vector *vector, void *element);
-int vector_size(vector *vector);
+void vector_item_at(vector *vector, int index, void *target);

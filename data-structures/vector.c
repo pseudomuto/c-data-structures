@@ -2,7 +2,7 @@
 #include <string.h>
 #include <assert.h>
 
-#include "vector.h"
+#include "../headers/vector.h"
 
 static void vector_grow(vector *vector)
 {
@@ -11,9 +11,16 @@ static void vector_grow(vector *vector)
 	assert(vector->elements != NULL);
 }
 
+static void *vector_address(vector *vector, int index)
+{
+	int addr = vector->elementSize * index;
+	return (char *)vector->elements + addr;
+}
+
 void vector_new(vector *vector, int elementSize)
 {
 	assert(elementSize > 0);
+	vector->elementSize = elementSize;
 	vector->logicalLength = 0;
 	vector->allocatedLength = 2;
 	vector->elements = NULL;
@@ -22,16 +29,13 @@ void vector_new(vector *vector, int elementSize)
 
 void vector_destroy(vector *vector)
 {
-	int i;
-	void *freeTarget;
-
-	for(i = 0; i < vector->logicalLength; i++) {
-		freeTarget = (char *)vector->elements + i * vector->elementSize;
-		free(freeTarget);
-	}
-
 	// free main elements
 	free(vector->elements);
+}
+
+int vector_size(vector *vector)
+{
+	return vector->logicalLength;
 }
 
 void vector_add(vector *vector, void *element)
@@ -40,6 +44,14 @@ void vector_add(vector *vector, void *element)
 		vector_grow(vector);
 	}
 
-	void *target = (char *)vector->elements + vector->elementSize * vector->logicalLength++;
+	void *target = vector_address(vector, vector->logicalLength++);
 	memcpy(target, element, vector->elementSize);
+}
+
+void vector_item_at(vector *vector, int index, void *target)
+{
+	assert(index >= 0 && index < vector->logicalLength);
+
+	void *source = vector_address(vector, index);
+	memcpy(target, source, vector->elementSize);
 }
