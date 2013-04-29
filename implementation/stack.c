@@ -2,9 +2,9 @@
 #include <string.h>
 #include <assert.h>
 
-#include "../headers/stack.h"
+#include "../data-structures/stack.h"
 
-void stack_new(stack *s, int elementSize, void (*freeFn)(void *))
+void stack_new(stack *s, int elementSize, freeFunction freeFn)
 {
 	s->logicalLength = 0;
 	s->elementSize = elementSize;
@@ -56,4 +56,9 @@ void stack_peek(stack *s, void *element)
 
 	stackNode *node = s->head;
 	memcpy(element, node->data, s->elementSize);
+}
+
+int stack_size(stack *s)
+{
+	return s->logicalLength;
 }

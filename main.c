@@ -1,6 +1,5 @@
 #include <stdio.h>
-#include "tests/vector_tests.h"
-#include "tests/stack_tests.h"
+#include "tests/tests.h"
 
 int main(int argc, char *argv[])
 {

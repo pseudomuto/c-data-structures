@@ -1,12 +1,8 @@
-// void stack_new(stack *s, int elementSize, void (*freeFn)(void *));
-// void stack_destroy(stack *s);
-// void stack_push(stack *s, void *element);
-// void stack_pop(stack *s, void *element);
-// void stack_peek(stack *s, void *element);
-
 #include <assert.h>
+#include <stdlib.h>
+#include <string.h>
 
-#include "../headers/stack.h"
+#include "../data-structures/stack.h"
 
 void test_stack_initializes() 
 {
@@ -68,10 +64,39 @@ void test_stack_can_peek_item()
 	stack_destroy(&s);
 }
 
+void test_stack_free_string(void *data)
+{
+	free(*(char **)data);
+}
+
+void test_stack_can_work_with_strings()
+{
+	stack s;
+	stack_new(&s, sizeof(char *), test_stack_free_string);
+
+	const char *names[] = { "David", "Muto", "Tester" };
+	int i;
+	char *name;
+	for(i = 0; i < 3; i++) {
+		name = strdup(names[i]);
+		stack_push(&s, &name);
+	}
+
+	assert(stack_size(&s) == 3);
+
+	stack_pop(&s, &name);
+	assert(strcmp(name, "Tester") == 0);
+	free(name);
+
+	assert(stack_size(&s) == 2);
+	stack_destroy(&s);
+}
+
 void test_stack_operations()
 {
 	test_stack_initializes();
 	test_stack_can_push_item();
 	test_stack_can_pop_item();
 	test_stack_can_peek_item();
+	test_stack_can_work_with_strings();
 }

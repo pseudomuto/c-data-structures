@@ -2,7 +2,7 @@
 #include <string.h>
 #include <assert.h>
 
-#include "../headers/vector.h"
+#include "../data-structures/vector.h"
 
 static void vector_grow(vector *vector)
 {
@@ -24,7 +24,7 @@ static void vector_copy_item(vector *vector, int sourceIndex, int destIndex)
 	memcpy(target, source, vector->elementSize);
 }
 
-void vector_new(vector *vector, int elementSize, void (*freeFn)(void *))
+void vector_new(vector *vector, int elementSize, freeFunction freeFn)
 {
 	assert(elementSize > 0);
 	vector->elementSize = elementSize;

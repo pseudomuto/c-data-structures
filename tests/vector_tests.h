@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
-#include "../headers/vector.h"
+#include "../data-structures/vector.h"
 
 void test_vector_can_get_item_at_index()
 {
