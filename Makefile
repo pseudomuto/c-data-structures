@@ -5,7 +5,7 @@ IMPL=implementation
 CLEAN=$(APP) *.o
 TARGETS=main.o stack.o vector.o queue.o
 
-all: $(TARGETS)
+default: $(TARGETS)
 	$(CC) $(TARGETS) -o $(APP)
 
 main.o: main.c
@@ -20,5 +20,6 @@ vector.o: $(IMPL)/vector.c
 queue.o: $(IMPL)/queue.c
 	$(CC) -c $(IMPL)/queue.c
 
+.PHONY: clean
 clean:
 	rm -rf $(CLEAN)

@@ -18,9 +18,9 @@ void queue_destroy(queue *q)
 	queueNode *current;
 	while(q->head != NULL) {
 		current = q->head;
-		q->head = q->head->next;
+		q->head = current->next;
 
-		if (q->freeFn) {
+		if (q->freeFn && current->data) {
 			q->freeFn(current->data);
 		}
 
@@ -33,6 +33,8 @@ void queue_enqueue(queue *q, void *element)
 {
 	queueNode *node = malloc(sizeof(queueNode));
 	node->data = malloc(q->elementSize);
+	node->next = NULL;
+	
 	memcpy(node->data, element, q->elementSize);
 
 	if(q->logicalLength == 0) {
@@ -50,7 +52,7 @@ void queue_dequeue(queue *q, void *element)
 	assert(q->logicalLength > 0);
 
 	queueNode *node = q->head;
-	q->head = q->head->next;
+	q->head = node->next;
 	memcpy(element, node->data, q->elementSize);
 
 	free(node->data);
@@ -58,7 +60,7 @@ void queue_dequeue(queue *q, void *element)
 
 	// no more elements
 	if(!q->head) {
-		q->tail = NULL;
+		q->tail = q->head;
 	}
 
 	q->logicalLength--;
@@ -67,6 +69,9 @@ void queue_dequeue(queue *q, void *element)
 void queue_peek(queue *q, void *element)
 {
 	assert(q->logicalLength > 0);
+
+	queueNode *node = q->head;
+	memcpy(element, node->data, q->elementSize);
 }
 
 int queue_size(queue *q)

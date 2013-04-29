@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "common.h"
 #include "../data-structures/stack.h"
 
 void test_stack_initializes() 
@@ -15,6 +16,7 @@ void test_stack_initializes()
 	assert(s.head == NULL);
 
 	stack_destroy(&s);
+	PRINT_SUCCESS();
 }
 
 void test_stack_can_push_item()
@@ -28,6 +30,7 @@ void test_stack_can_push_item()
 	assert(s.logicalLength == 1);
 
 	stack_destroy(&s);
+	PRINT_SUCCESS();
 } 
 
 void test_stack_can_pop_item()
@@ -45,6 +48,7 @@ void test_stack_can_pop_item()
 	assert(s.logicalLength == 0);
 
 	stack_destroy(&s);
+	PRINT_SUCCESS();
 }
 
 void test_stack_can_peek_item()
@@ -62,6 +66,7 @@ void test_stack_can_peek_item()
 	assert(s.logicalLength == 1);
 
 	stack_destroy(&s);
+	PRINT_SUCCESS();
 }
 
 void test_stack_free_string(void *data)
@@ -90,6 +95,7 @@ void test_stack_can_work_with_strings()
 
 	assert(stack_size(&s) == 2);
 	stack_destroy(&s);
+	PRINT_SUCCESS();
 }
 
 void test_stack_operations()
