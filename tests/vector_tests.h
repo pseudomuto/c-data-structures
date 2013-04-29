@@ -116,7 +116,7 @@ void test_vector_can_remove_values()
 
 	int i;
 	for(i = 0; i < initLength; i++) {
-		vector_add(&v, &v);
+		vector_add(&v, &i);
 	}
 
 	// remove the first element
@@ -129,8 +129,14 @@ void test_vector_can_remove_values()
 	// remove the last element
 	vector_remove_at(&v, vector_size(&v) - 1);
 	vector_item_at(&v, vector_size(&v) - 1, &value);
-	assert(value == 8);
 	assert(vector_size(&v) == initLength - 2);
+	assert(value == 8);
+
+	// remove something in the middle
+	vector_remove_at(&v, 4);
+	vector_item_at(&v, 4, &value);
+	assert(vector_size(&v) == initLength - 3);
+	assert(value == 6);
 
 	vector_destroy(&v);
 }

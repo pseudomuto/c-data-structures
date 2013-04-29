@@ -17,6 +17,13 @@ static void *vector_address(vector *vector, int index)
 	return (char *)vector->elements + addr;
 }
 
+static void vector_copy_item(vector *vector, int sourceIndex, int destIndex)
+{
+	void *source = vector_address(vector, sourceIndex);
+	void *target = vector_address(vector, destIndex);
+	memcpy(target, source, vector->elementSize);
+}
+
 void vector_new(vector *vector, int elementSize, void (*freeFn)(void *))
 {
 	assert(elementSize > 0);
@@ -88,21 +95,16 @@ void vector_insert_at(vector *vector, int index, void *target)
 void vector_remove_at(vector *vector, int index)
 {
 	assert(index >= 0 && index < vector->logicalLength);
-	void *item = vector_address(vector, index);
+	
+	// remove the item
+	void *item;
+	vector_item_at(vector, index, item);
 	if(vector->freeFn) {
 		vector->freeFn(item);
 	}
-
-	if(index < vector->logicalLength - 1) {
-		int i;
-		void *source;
-		void *destination;
-
-		for(i = index; i < vector->logicalLength; i++) {
-			source = vector_address(vector, i + 1);
-			destination = vector_address(vector, i);
-			memcpy(destination, source, vector->elementSize);
-		}
+	
+	while(++index < vector->logicalLength) {
+		vector_copy_item(vector, index, index - 1);
 	}
 
 	vector->logicalLength--;
