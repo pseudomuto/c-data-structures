@@ -15,7 +15,7 @@ void queue_new(queue *q, int elementSize, freeFunction freeFn)
 
 void queue_destroy(queue *q)
 {
-	queueNode *current;
+	listNode *current;
 	while(q->head != NULL) {
 		current = q->head;
 		q->head = current->next;
@@ -31,7 +31,7 @@ void queue_destroy(queue *q)
 
 void queue_enqueue(queue *q, void *element)
 {
-	queueNode *node = malloc(sizeof(queueNode));
+	listNode *node = malloc(sizeof(listNode));
 	node->data = malloc(q->elementSize);
 	node->next = NULL;
 	
@@ -51,7 +51,7 @@ void queue_dequeue(queue *q, void *element)
 {
 	assert(q->logicalLength > 0);
 
-	queueNode *node = q->head;
+	listNode *node = q->head;
 	q->head = node->next;
 	memcpy(element, node->data, q->elementSize);
 
@@ -70,7 +70,7 @@ void queue_peek(queue *q, void *element)
 {
 	assert(q->logicalLength > 0);
 
-	queueNode *node = q->head;
+	listNode *node = q->head;
 	memcpy(element, node->data, q->elementSize);
 }
 

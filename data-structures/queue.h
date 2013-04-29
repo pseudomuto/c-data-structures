@@ -3,16 +3,11 @@
 
 #include "common.h"
 
-typedef struct _queueNode {
-	void *data;
-	struct _queueNode *next;
-} queueNode;
-
 typedef struct {
 	int logicalLength;
 	int elementSize;
-	queueNode *head;
-	queueNode *tail;
+	listNode *head;
+	listNode *tail;
 	freeFunction freeFn;
 } queue;
 

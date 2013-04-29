@@ -3,15 +3,10 @@
 
 #include "common.h"
 
-typedef struct _stackNode {
-	void *data;
-	struct _stackNode *next;
-} stackNode;
-
 typedef struct {
 	int logicalLength;
 	int elementSize;
-	stackNode *head;
+	listNode *head;
 	freeFunction freeFn;
 } stack;
 
