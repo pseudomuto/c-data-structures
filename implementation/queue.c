@@ -1,0 +1,75 @@
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+
+#include "../data-structures/queue.h"
+
+void queue_new(queue *q, int elementSize, freeFunction freeFn)
+{
+	assert(elementSize > 0);
+	q->logicalLength = 0;
+	q->elementSize = elementSize;
+	q->head = q->tail = NULL;
+	q->freeFn = freeFn;
+}
+
+void queue_destroy(queue *q)
+{
+	queueNode *current;
+	while(q->head != NULL) {
+		current = q->head;
+		q->head = q->head->next;
+
+		if (q->freeFn) {
+			q->freeFn(current->data);
+		}
+
+		free(current->data);
+		free(current);
+	}
+}
+
+void queue_enqueue(queue *q, void *element)
+{
+	queueNode *node = malloc(sizeof(queueNode));
+	node->data = malloc(q->elementSize);
+	memcpy(node->data, element, q->elementSize);
+
+	if(q->logicalLength == 0) {
+		q->head = q->tail = node;
+	} else {
+		q->tail->next = node;
+		q->tail = node;
+	}
+
+	q->logicalLength++;
+}
+
+void queue_dequeue(queue *q, void *element)
+{
+	assert(q->logicalLength > 0);
+
+	queueNode *node = q->head;
+	q->head = q->head->next;
+	memcpy(element, node->data, q->elementSize);
+
+	free(node->data);
+	free(node);
+
+	// no more elements
+	if(!q->head) {
+		q->tail = NULL;
+	}
+
+	q->logicalLength--;
+}
+
+void queue_peek(queue *q, void *element)
+{
+	assert(q->logicalLength > 0);
+}
+
+int queue_size(queue *q)
+{
+	return q->logicalLength;
+}

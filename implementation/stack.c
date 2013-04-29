@@ -6,6 +6,7 @@
 
 void stack_new(stack *s, int elementSize, freeFunction freeFn)
 {
+	assert(elementSize > 0);
 	s->logicalLength = 0;
 	s->elementSize = elementSize;
 	s->freeFn = freeFn;
@@ -18,6 +19,10 @@ void stack_destroy(stack *s)
 	while(s->head != NULL) {
 		current = s->head;
 		s->head = current->next;
+
+		if (s->freeFn) {
+			s->freeFn(current->data);
+		}
 
 		free(current->data);
 		free(current);
