@@ -140,3 +140,12 @@ void test_vector_can_remove_values()
 
 	vector_destroy(&v);
 }
+
+void test_vector_operations()
+{
+	test_vector_can_get_item_at_index();
+	test_vector_can_grow();
+	test_vector_can_store_strings();
+	test_vector_can_insert_values();
+	test_vector_can_remove_values();
+}
