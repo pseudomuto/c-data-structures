@@ -6,64 +6,36 @@
 
 void stack_new(stack *s, int elementSize, freeFunction freeFn)
 {
-	assert(elementSize > 0);
-	s->logicalLength = 0;
-	s->elementSize = elementSize;
-	s->freeFn = freeFn;
-	s->head = NULL;
+	s->list = malloc(sizeof(list));
+	list_new(s->list, elementSize, freeFn);
 }
 
 void stack_destroy(stack *s)
 {
-	listNode *current;
-	while(s->head != NULL) {
-		current = s->head;
-		s->head = current->next;
-
-		if (s->freeFn) {
-			s->freeFn(current->data);
-		}
-
-		free(current->data);
-		free(current);
-	}
+	list_destroy(s->list);
+	free(s->list);
 }
 
 void stack_push(stack *s, void *element)
 {
-	listNode *node = malloc(sizeof(listNode));
-	node->data = malloc(s->elementSize);
-	memcpy(node->data, element, s->elementSize);
-
-	node->next = s->head;
-	s->head = node;
-	s->logicalLength++;
+	list_prepend(s->list, element);
 }
 
 void stack_pop(stack *s, void *element)
 {
 	// don't pop an empty stack!
-	assert(s->logicalLength > 0);
+	assert(stack_size(s) > 0);
 
-	listNode *node = s->head;
-	memcpy(element, node->data, s->elementSize);
-	s->head = s->head->next;
-	s->logicalLength--;
-
-	// free data and node
-	free(node->data);
-	free(node);
+	list_head(s->list, element, REMOVE);
 }
 
 void stack_peek(stack *s, void *element)
 {
-	assert(s->logicalLength > 0);
-
-	listNode *node = s->head;
-	memcpy(element, node->data, s->elementSize);
+	assert(stack_size(s) > 0);
+	list_head(s->list, element, PEEK);
 }
 
 int stack_size(stack *s)
 {
-	return s->logicalLength;
+	return s->list->logicalLength;
 }

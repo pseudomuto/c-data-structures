@@ -2,6 +2,7 @@
 #define __CDS_QUEUE_H 
 
 #include "common.h"
+#include "list.h"
 
 typedef struct {
 	int logicalLength;
