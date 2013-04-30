@@ -3,6 +3,7 @@
 .libs
 *~
 missing
+ar-lib
 ltmain.sh
 libIDL.m4
 libIDL.spec
