@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
-#include "../headers/vector.h"
+
+#include "common.h"
+#include "../data-structures/vector.h"
 
 void test_vector_can_get_item_at_index()
 {
@@ -20,6 +22,7 @@ void test_vector_can_get_item_at_index()
 	}
 	
 	vector_destroy(&v);	
+	PRINT_SUCCESS();
 }
 
 void test_vector_can_grow()
@@ -39,6 +42,7 @@ void test_vector_can_grow()
 	assert(value == vector_initial_size);
 
 	vector_destroy(&v);
+	PRINT_SUCCESS();
 }
 
 void test_vector_string_free(void *pointer)
@@ -66,6 +70,7 @@ void test_vector_can_store_strings()
 	}
 
 	vector_destroy(&v);
+	PRINT_SUCCESS();
 }
 
 void test_vector_can_insert_values()
@@ -105,6 +110,7 @@ void test_vector_can_insert_values()
 	assert(value == 0);
 
 	vector_destroy(&v);
+	PRINT_SUCCESS();
 }
 
 void test_vector_can_remove_values()
@@ -139,4 +145,14 @@ void test_vector_can_remove_values()
 	assert(value == 6);
 
 	vector_destroy(&v);
+	PRINT_SUCCESS();
+}
+
+void test_vector_operations()
+{
+	test_vector_can_get_item_at_index();
+	test_vector_can_grow();
+	test_vector_can_store_strings();
+	test_vector_can_insert_values();
+	test_vector_can_remove_values();
 }
