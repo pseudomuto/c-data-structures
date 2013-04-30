@@ -7,6 +7,7 @@ int main(int argc, char *argv[])
 	test_list_operations();
 	test_stack_operations();
 	test_queue_operations();
+	test_map_operations();
 	
 	printf("All tests passed.\n");
 	

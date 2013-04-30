@@ -3,7 +3,7 @@ CC=gcc
 APP=testapp
 IMPL=implementation
 CLEAN=$(APP) *.o
-TARGETS=main.o list.o stack.o vector.o queue.o
+TARGETS=main.o list.o stack.o vector.o queue.o map.o
 
 default: $(TARGETS)
 	$(CC) $(TARGETS) -o $(APP)
@@ -22,6 +22,9 @@ vector.o: $(IMPL)/vector.c
 
 queue.o: $(IMPL)/queue.c
 	$(CC) -c $(IMPL)/queue.c
+
+map.o: $(IMPL)/map.c
+	$(CC) -c $(IMPL)/map.c
 
 .PHONY: clean
 clean:
