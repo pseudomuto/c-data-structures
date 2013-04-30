@@ -62,6 +62,32 @@ void test_map_can_set_value()
 	PRINT_SUCCESS();	
 }
 
+void test_map_can_set_multiple_values()
+{
+	map m;
+	map_new(&m, sizeof(int), NULL);
+
+	const char *keys[] = { "First", "Last" };
+
+	int value = 10;
+	map_set(&m, keys[1], &value);
+	assert(map_size(&m) == 1);
+
+	int value2 = 12;
+	map_set(&m, keys[0], &value2);
+	assert(map_size(&m) == 2);
+
+	int found;
+	map_get(&m, keys[0], &found);
+	assert(found == value2);
+
+	map_get(&m, keys[1], &found);
+	assert(found == value);
+
+	map_destroy(&m);
+	PRINT_SUCCESS();	
+}
+
 void test_map_can_get_value()
 {
 	map m;
@@ -81,10 +107,41 @@ void test_map_can_get_value()
 	PRINT_SUCCESS();
 }
 
+void test_map_string_free(void *data) 
+{
+	free(*(char **)data);
+}
+
+void test_map_can_work_with_strings()
+{
+	const char *keys[] = { "First", "Last", "Other" };
+	const char *names[] = { "David", "Muto", "Test" };
+
+	map m;
+	map_new(&m, sizeof(char *), test_map_string_free);
+
+	int i;
+	char *name;
+	for(i = 0; i < 3; i++) {
+		name = strdup(names[i]);
+		map_set(&m, keys[i], &name);
+	}
+
+	assert(map_size(&m) == 3);
+
+	map_get(&m, keys[1], &name);
+	assert(strcmp(name, "Muto") == 0);
+
+	map_destroy(&m);
+	PRINT_SUCCESS();
+}
+
 void test_map_operations()
 {
 	test_map_initializes();
 	test_map_contains_key();
 	test_map_can_set_value();
 	test_map_can_get_value();
+	test_map_can_set_multiple_values();
+	test_map_can_work_with_strings();
 }
