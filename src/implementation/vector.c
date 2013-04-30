@@ -97,8 +97,7 @@ void vector_remove_at(vector *vector, int index)
 	assert(index >= 0 && index < vector->logicalLength);
 	
 	// remove the item
-	void *item;
-	vector_item_at(vector, index, item);
+	void *item = vector_address(vector, index);
 	if(vector->freeFn) {
 		vector->freeFn(item);
 	}
