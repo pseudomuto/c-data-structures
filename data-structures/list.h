@@ -26,6 +26,6 @@ void list_append(list *list, void *element);
 int list_size(list *list);
 
 void list_head(list *list, void *element, listAction action);
-void list_tail(list *list, void *element, listAction action);
+void list_tail(list *list, void *element);
 
 #endif

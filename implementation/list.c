@@ -80,7 +80,7 @@ void list_head(list *list, void *element, listAction action)
 	}
 }
 
-void list_tail(list *list, void *element, listAction action)
+void list_tail(list *list, void *element)
 {
 	assert(list->tail != NULL);
 	listNode *node = list->tail;

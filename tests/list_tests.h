@@ -33,7 +33,7 @@ void test_list_can_append_item()
 	assert(list_size(&l) == 10);
 
 	int value;
-	list_tail(&l, &value, PEEK);
+	list_tail(&l, &value);
 	assert(value == 9);
 
 	list_head(&l, &value, PEEK);
@@ -56,7 +56,7 @@ void test_list_can_prepend_item()
 	assert(list_size(&l) == 10);
 
 	int value;
-	list_tail(&l, &value, PEEK);
+	list_tail(&l, &value);
 	assert(value == 0);
 
 	list_head(&l, &value, PEEK);
