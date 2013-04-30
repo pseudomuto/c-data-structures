@@ -37,5 +37,5 @@ void stack_peek(stack *s, void *element)
 
 int stack_size(stack *s)
 {
-	return s->list->logicalLength;
+	return list_size(s->list);
 }
