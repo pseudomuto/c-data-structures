@@ -11,8 +11,9 @@ A simple library of data structures for C. The current release contains implemen
 ## Verifying Functionality
 
 * Clone the repo
-* Run `./configure`
-* Run `make`
+* Run `autoreconf --install` to generate the build system files
+* Run `./configure` to configure your environment
+* Run `make` to build the test project
 * Run `./src/testapp` to run unit tests
 
 ## Build System
