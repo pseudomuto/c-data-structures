@@ -2,12 +2,10 @@
 #define __CDS_STACK_H
 
 #include "common.h"
+#include "list.h"
 
 typedef struct {
-	int logicalLength;
-	int elementSize;
-	listNode *head;
-	freeFunction freeFn;
+	list *list;
 } stack;
 
 void stack_new(stack *s, int elementSize, freeFunction freeFn);

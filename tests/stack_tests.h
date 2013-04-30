@@ -10,10 +10,7 @@ void test_stack_initializes()
 	stack s;
 	stack_new(&s, sizeof(int), NULL);
 
-	assert(s.logicalLength == 0);
-	assert(s.elementSize == sizeof(int));
-	assert(s.freeFn == NULL);
-	assert(s.head == NULL);
+	assert(stack_size(&s) == 0);
 
 	stack_destroy(&s);
 	PRINT_SUCCESS();
@@ -27,7 +24,7 @@ void test_stack_can_push_item()
 	int value = 10;
 	stack_push(&s, &value);
 
-	assert(s.logicalLength == 1);
+	assert(stack_size(&s) == 1);
 
 	stack_destroy(&s);
 	PRINT_SUCCESS();
@@ -40,12 +37,12 @@ void test_stack_can_pop_item()
 
 	int value = 10;
 	stack_push(&s, &value);
-	assert(s.logicalLength == 1);
+	assert(stack_size(&s) == 1);
 
 	int other;
 	stack_pop(&s, &other);
 	assert(other == value);
-	assert(s.logicalLength == 0);
+	assert(stack_size(&s) == 0);
 
 	stack_destroy(&s);
 	PRINT_SUCCESS();
@@ -58,12 +55,12 @@ void test_stack_can_peek_item()
 
 	int value = 10;
 	stack_push(&s, &value);
-	assert(s.logicalLength == 1);
+	assert(stack_size(&s) == 1);
 
 	int other;
 	stack_peek(&s, &other);
 	assert(other == value);
-	assert(s.logicalLength == 1);
+	assert(stack_size(&s) == 1);
 
 	stack_destroy(&s);
 	PRINT_SUCCESS();

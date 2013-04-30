@@ -2,13 +2,10 @@
 #define __CDS_QUEUE_H 
 
 #include "common.h"
+#include "list.h"
 
 typedef struct {
-	int logicalLength;
-	int elementSize;
-	listNode *head;
-	listNode *tail;
-	freeFunction freeFn;
+	list *list;
 } queue;
 
 void queue_new(queue *q, int elementSize, freeFunction freeFn);

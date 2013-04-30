@@ -10,11 +10,7 @@ void test_queue_initializes()
 	queue q;
 	queue_new(&q, sizeof(int), NULL);
 
-	assert(q.logicalLength == 0);
-	assert(q.elementSize == sizeof(int));
-	assert(q.freeFn == NULL);
-	assert(q.head == NULL);
-	assert(q.tail == NULL);
+	assert(queue_size(&q) == 0);
 
 	queue_destroy(&q);
 	PRINT_SUCCESS();
@@ -22,51 +18,51 @@ void test_queue_initializes()
 
 void test_queue_can_enqueue_item()
 {
-	queue s;
-	queue_new(&s, sizeof(int), NULL);
+	queue q;
+	queue_new(&q, sizeof(int), NULL);
 
 	int value = 10;
-	queue_enqueue(&s, &value);
+	queue_enqueue(&q, &value);
 
-	assert(s.logicalLength == 1);
+	assert(queue_size(&q) == 1);
 
-	queue_destroy(&s);
+	queue_destroy(&q);
 	PRINT_SUCCESS();
 } 
 
 void test_queue_can_dequeue_item()
 {
-	queue s;
-	queue_new(&s, sizeof(int), NULL);
+	queue q;
+	queue_new(&q, sizeof(int), NULL);
 
 	int value = 10;
-	queue_enqueue(&s, &value);
-	assert(s.logicalLength == 1);
+	queue_enqueue(&q, &value);
+	assert(queue_size(&q) == 1);
 
 	int other;
-	queue_dequeue(&s, &other);
+	queue_dequeue(&q, &other);
 	assert(other == value);
-	assert(s.logicalLength == 0);
+	assert(queue_size(&q) == 0);
 
-	queue_destroy(&s);
+	queue_destroy(&q);
 	PRINT_SUCCESS();
 }
 
 void test_queue_can_peek_item()
 {
-	queue s;
-	queue_new(&s, sizeof(int), NULL);
+	queue q;
+	queue_new(&q, sizeof(int), NULL);
 
 	int value = 10;
-	queue_enqueue(&s, &value);
-	assert(s.logicalLength == 1);
+	queue_enqueue(&q, &value);
+	assert(queue_size(&q) == 1);
 
 	int other;
-	queue_peek(&s, &other);
+	queue_peek(&q, &other);
 	assert(other == value);
-	assert(s.logicalLength == 1);
+	assert(queue_size(&q) == 1);
 
-	queue_destroy(&s);
+	queue_destroy(&q);
 	PRINT_SUCCESS();
 }
 
