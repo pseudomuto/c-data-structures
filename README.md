@@ -11,13 +11,9 @@ A simple library of data structures for C. The current release contains implemen
 ## Verifying Functionality
 
 * Clone the repo
-* Run `make tests` to ensure the application compiles and all tests pass
-
-## Building the static library (only tested on OSX so far)
-
-* Run `make dist` to generate the .a file and headers
-* Copy `distribution` folder to your application
-* Include headers as needed
+* Run `./configure`
+* Run `make`
+* Run `./src/testapp` to run unit tests
 
 ## Build System
 
