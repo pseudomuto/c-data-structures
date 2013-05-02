@@ -64,14 +64,26 @@ void list_append(list *list, void *element)
 	list->logicalLength++;
 }
 
-void list_head(list *list, void *element, listAction action)
+void list_for_each(list *list, listIterator iterator)
+{
+	assert(iterator != NULL);
+
+	listNode *node = list->head;
+	bool result = TRUE;
+	while(node != NULL && result) {
+		result = iterator(node->data);
+		node = node->next;
+	}
+}
+
+void list_head(list *list, void *element, bool removeFromList)
 {
 	assert(list->head != NULL);
 
 	listNode *node = list->head;
 	memcpy(element, node->data, list->elementSize);
 
-	if(action == REMOVE) {
+	if(removeFromList) {
 		list->head = node->next;
 		list->logicalLength--;
 
