@@ -33,17 +33,16 @@ After downloading the above packages, run the following to install them:
 
 * Clone the repo
 * Run `autoreconf --install` to generate the build system files
-* Run `./configure` to configure your environment
-* Run `make` to build the test project
-* Run `./src/testapp` to run unit tests
+* Run `./configure && make` to configure and build the project
+* Run `make test` to run the simple test suite
 * Run `make clean` to clean up
 
 ## Using the Static Library
 
-* Run `make` to generate the static library and test application
+* Run `./configure && make` to generate the static library
 * copy `libcdatastructures.a` and the `data-structures` folder (headers) to your application folder
 * include appropriate headers for the data structures you want to use
-* add `-lcdatastructures` to you compilation flags
+* add `-L. -lcdatastructures` to you compilation flags
 
 ## Sample Applications
 
