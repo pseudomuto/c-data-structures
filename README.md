@@ -1,5 +1,7 @@
 # C Data Structures
 
+[![Build Status](https://travis-ci.org/davidmuto/c-data-structures.png?branch=master)](https://travis-ci.org/davidmuto/c-data-structures)
+
 A simple library of data structures for C. The current release contains implementations of
 
 * Linked List (src/data-structures/list.h)
