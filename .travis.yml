@@ -1,0 +1,4 @@
+language: c
+install: autoreconf --install
+compiler:
+  - gcc
