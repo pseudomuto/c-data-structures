@@ -1,9 +1,11 @@
 # automake/conf
 .deps
+.dirstamp
 .libs
 *~
 missing
 ar-lib
+compile
 ltmain.sh
 libIDL.m4
 libIDL.spec

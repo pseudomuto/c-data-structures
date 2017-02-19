@@ -1,4 +1,10 @@
+sudo: false
 language: c
+
 install: autoreconf --install
 compiler:
   - gcc
+
+notifications:
+  email:
+    false
