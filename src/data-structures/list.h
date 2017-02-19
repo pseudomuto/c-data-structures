@@ -18,15 +18,28 @@ typedef struct {
 	freeFunction freeFn;
 } list;
 
-void list_new(list *list, int elementSize, freeFunction freeFn);
-void list_destroy(list *list);
+void
+list_new(list *list, int elementSize, freeFunction freeFn);
 
-void list_prepend(list *list, void *element);
-void list_append(list *list, void *element);
-int list_size(list *list);
+void
+list_destroy(list *list);
 
-void list_for_each(list *list, listIterator iterator);
-void list_head(list *list, void *element, bool removeFromList);
-void list_tail(list *list, void *element);
+void
+list_prepend(list *list, void *element);
+
+void
+list_append(list *list, void *element);
+
+int
+list_size(list *list);
+
+void
+list_for_each(list *list, listIterator iterator);
+
+void
+list_head(list *list, void *element, bool removeFromList);
+
+void
+list_tail(list *list, void *element);
 
 #endif

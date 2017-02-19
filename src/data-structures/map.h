@@ -17,12 +17,22 @@ typedef struct {
 	freeFunction freeFn;
 } map;
 
-void map_new(map *map, int elementSize, freeFunction freeFn);
-void map_destroy(map *map);
+void
+map_new(map *map, int elementSize, freeFunction freeFn);
 
-bool map_contains_key(map *map, const char *key);
-void map_set(map *map, const char *key, void *element);
-void map_get(map *map, const char *key, void *element);
-int map_size(map *map);
+void
+map_destroy(map *map);
+
+bool
+map_contains_key(map *map, const char *key);
+
+void
+map_set(map *map, const char *key, void *element);
+
+void
+map_get(map *map, const char *key, void *element);
+
+int
+map_size(map *map);
 
 #endif
