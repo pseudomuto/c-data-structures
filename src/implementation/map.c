@@ -75,7 +75,7 @@ map_destroy(map *map) {
 bool
 map_contains_key(map *map, const char *key) {
   mapNode *node = map_find_node(map->root, key);
-  return (node == NULL) ? FALSE : TRUE;
+  return (node == NULL);
 }
 
 void

@@ -1,6 +1,7 @@
 #ifndef __CDS_LINKEDLIST_H
 #define __CDS_LINKEDLIST_H
 
+#include <stdbool.h>
 #include "common.h"
 
 typedef bool (*listIterator)(void *);

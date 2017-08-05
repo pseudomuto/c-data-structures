@@ -29,11 +29,11 @@ test_map_contains_key() {
   assert(map_size(&m) == 1);
 
   bool result = map_contains_key(&m, key);
-  assert(result == TRUE);
+  assert(result == true);
   assert(result);
 
   result = map_contains_key(&m, "someKey");
-  assert(result == FALSE);
+  assert(result == false);
   assert(!result);
 
   map_destroy(&m);

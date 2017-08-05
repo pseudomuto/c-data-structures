@@ -36,7 +36,7 @@ test_list_can_append_item() {
   list_tail(&l, &value);
   assert(value == 9);
 
-  list_head(&l, &value, FALSE);
+  list_head(&l, &value, false);
   assert(value == 0);
 
   list_destroy(&l);
@@ -59,7 +59,7 @@ test_list_can_prepend_item() {
   list_tail(&l, &value);
   assert(value == 0);
 
-  list_head(&l, &value, FALSE);
+  list_head(&l, &value, false);
   assert(value == 9);
 
   list_destroy(&l);
@@ -71,9 +71,9 @@ static int IteratorCount;
 bool
 test_list_iterator(void *data) {
   assert(*(int *)data == IteratorCount++);
-  if(IteratorCount == 5) return FALSE;
+  if(IteratorCount == 5) return false;
 
-  return TRUE;
+  return true;
 }
 
 void

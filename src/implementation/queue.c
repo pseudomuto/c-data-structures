@@ -23,12 +23,12 @@ queue_enqueue(queue *q, void *element) {
 
 void
 queue_dequeue(queue *q, void *element) {
-  list_head(q->list, element, TRUE);
+  list_head(q->list, element, true);
 }
 
 void
 queue_peek(queue *q, void *element) {
-  list_head(q->list, element, FALSE);
+  list_head(q->list, element, false);
 }
 
 int

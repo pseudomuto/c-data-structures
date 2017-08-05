@@ -25,13 +25,13 @@ stack_pop(stack *s, void *element) {
   // don't pop an empty stack!
   assert(stack_size(s) > 0);
 
-  list_head(s->list, element, TRUE);
+  list_head(s->list, element, true);
 }
 
 void
 stack_peek(stack *s, void *element) {
   assert(stack_size(s) > 0);
-  list_head(s->list, element, FALSE);
+  list_head(s->list, element, false);
 }
 
 int

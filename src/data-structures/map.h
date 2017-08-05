@@ -1,6 +1,7 @@
 #ifndef __CDS_MAP_H
 #define __CDS_MAP_H
 
+#include <stdbool.h>
 #include "common.h"
 
 typedef struct _mapNode {
