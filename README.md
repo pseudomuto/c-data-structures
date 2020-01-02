@@ -1,49 +1,20 @@
 # C Data Structures
 
-[![Build Status](https://travis-ci.org/davidmuto/c-data-structures.png?branch=dev,master)](https://travis-ci.org/davidmuto/c-data-structures)
+[![Build Status](https://travis-ci.org/pseudomuto/c-data-structures.svg?branch=master)](https://travis-ci.org/pseudomuto/c-data-structures)
+[![codecov](https://codecov.io/gh/pseudomuto/c-data-structures/branch/master/graph/badge.svg)](https://codecov.io/gh/pseudomuto/c-data-structures)
 
 A simple library of data structures for C. The current release contains implementations of
 
-* Linked List (src/data-structures/list.h)
-* Stack (src/data-structures/stack.h)
-* Queue (src/data-structures/queue.h)
-* Vector (src/data-structures/vector.h)
-* Map (src/data-structures/map.h)
+* Linked List
+* Map
+* Queue
+* Stack
+* Vector
 
-## Build System
+## Contributing
 
-This application uses the GNU Build system. To run the sample app and compile the library you will need to install the following software packages:
+This application uses [CMake](https://cmake.org/). Any recent (> 3.10) will do.
 
-* [autoconf](http://ftp.gnu.org/gnu/autoconf/)
-* [automake](http://ftp.gnu.org/gnu/automake/)
-
-After downloading the above packages, run the following to install them:
-
-	$ cd [autoconf-download-dir]
-	$ ./configure
-	$ make
-	$ sudo make install
-
-	$ cd [automake-download-dir]
-	$ ./configure
-	$ make
-	$ sudo make install	
-
-## Verifying Functionality
-
-* Clone the repo
-* Run `autoreconf --install` to generate the build system files
-* Run `./configure && make` to configure and build the project
-* Run `make test` to run the simple test suite
-* Run `make clean` to clean up
-
-## Using the Static Library
-
-* Run `./configure && make` to generate the static library
-* copy `libcdatastructures.a` and the `data-structures` folder (headers) to your application folder
-* include appropriate headers for the data structures you want to use
-* add `-L. -lcdatastructures` to you compilation flags
-
-## Sample Applications
-
-### Coming Soon!
+* `make build` (generate the build system and build the library)
+* `make test` (run the unit tests)
+* `BUILD_TYPE=Release make build` to generate a release version of the static library
