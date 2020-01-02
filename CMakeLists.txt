@@ -8,6 +8,11 @@ include(GNUInstallDirs)
 # Compiler settings
 ################################################################################
 
+option(CODE_COVERAGE "Enable coverage reporting" OFF)
+if (CODE_COVERAGE AND CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
+    include(CodeCov)
+endif ()
+
 option(IWYU "Run include-what-you-use with the compiler" OFF)
 if (IWYU)
     find_program(IWYU_COMMAND NAMES include-what-you-use iwyu)

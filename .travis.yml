@@ -1,8 +1,13 @@
-sudo: false
-language: c
+language: python
+python: "3.7"
 compiler: gcc
 
-script: IWYU=OFF make cmake test
+cache:
+  pip: true
+
+install: pip install gcovr
+script: CODECOV=ON IWYU=OFF make cmake coverage
+after_success: bash <(curl -s https://codecov.io/bash) -f cmake-build-debug/codecov.xml
 
 notifications:
   email:
