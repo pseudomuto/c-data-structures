@@ -1,9 +1,8 @@
 sudo: false
 language: c
+compiler: gcc
 
-install: autoreconf --install
-compiler:
-  - gcc
+script: IWYU=OFF make cmake test
 
 notifications:
   email:
