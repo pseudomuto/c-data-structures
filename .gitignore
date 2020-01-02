@@ -1,34 +1,6 @@
-# automake/conf
-.deps
-.dirstamp
-.libs
-*~
-missing
-ar-lib
-compile
-ltmain.sh
-libIDL.m4
-libIDL.spec
-libIDL-2.0*.pc
-libIDL-config-2
-libIDL-zip
-libIDL2.info
-libtool
-texinfo.tex
-Makefile
-Makefile.in
-Makefile.msc
-aclocal.m4
-autom4te.cache
-config.guess
-config.log
-config.status
-config.sub
-configure
-depcomp
-INSTALL
-install-sh
-stamp-*
+# cmake build dirs
+cmake-build-*
+.idea
 
 # Object files
 *.o
@@ -47,4 +19,3 @@ stamp-*
 *.exe
 *.out
 *.app
-testapp
